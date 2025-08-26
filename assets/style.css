@@ -1,0 +1,9 @@
+* {
+  box-sizing: border-box;
+}
+
+li {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 12px;
+}
