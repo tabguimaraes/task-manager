@@ -5,56 +5,42 @@ const elemento = {
 };
 const listaTarefas = ["Estudar JS", "Estudar BD", "Estudar Redes"];
 
-function atualizarLista() {
-  elemento.lista.innerHTML = "";
-}
+listaTarefas.forEach((itemLista) => {
+  criarTarefas(itemLista);
+});
+
+listaTarefas.forEach((itemLista) => {
+  itemLista.addEventListener("click", function (evento) {
+    excluirTarefas(itemLista);
+  });
+});
+
+// function atualizarLista() {
+//   elemento.lista.innerHTML = "";
+// }
 
 elemento.formTarefa.addEventListener("submit", function (evento) {
   evento.preventDefault();
-
+  // atualizarLista();
   listaTarefas.push(elemento.inputTarefa.value);
-  elemento.inputTarefa.value = "";
-  atualizarLista();
+  criarTarefas(elemento.inputTarefa.value);
 });
 
-function adicionarTarefa() {
-  const elemento = {
-    li: criarElemento(),
-  };
-  console.log(elemento.li);
-  //   li.appendChild(btnEditar);
-  //   li.appendChild(btnRemover);
-  //   elemento.lista.appendChild(li);
+function criarTarefas(itemLista) {
+  let li = document.createElement("li");
+  li.textContent = itemLista;
 
-  //   btnEditar.addEventListener("click", () => {
-  //     let nomeTarefa = prompt("Digite o novo nome da tarefa: ");
-  //     if (nomeTarefa) {
-  //       listaTarefas[index] = nomeTarefa;
-  //       atualizarLista();
-  //     }
-  //   });
+  let btnEditar = document.createElement("button");
+  btnEditar.textContent = "Editar";
 
-  //   btnRemover.addEventListener("click", (evento) => {
-  //     listaTarefas.splice(index, index);
-  //     atualizarLista();
-  //   });
-  // });
+  let btnRemover = document.createElement("button");
+  btnRemover.textContent = "Remover";
+
+  li.appendChild(btnEditar);
+  li.appendChild(btnRemover);
+  elemento.lista.appendChild(li);
 }
 
-adicionarTarefa();
-
-// atualizarLista();
-
-function criarElemento() {
-  listaTarefas.forEach((itemLista, index) => {
-    let li = document.createElement("li");
-    li.textContent = itemLista;
-
-    let btnEditar = document.createElement("button");
-    btnEditar.textContent = "Editar";
-
-    let btnRemover = document.createElement("button");
-    btnRemover.textContent = "Remover";
-  });
-  return li, btnEditar, btnRemover;
+function excluirTarefas(itemLista) {
+  elemento.lista.removeChild(itemLista);
 }
